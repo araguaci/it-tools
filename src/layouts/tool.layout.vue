@@ -1,25 +1,27 @@
 <script lang="ts" setup>
 import { useRoute } from 'vue-router';
-import BaseLayout from './base.layout.vue';
 import { useHead } from '@vueuse/head';
 import type { HeadObject } from '@vueuse/head';
-import { reactive } from 'vue';
+import { computed } from 'vue';
+import FavoriteButton from '@/components/FavoriteButton.vue';
+import type { Tool } from '@/tools/tools.types';
+import BaseLayout from './base.layout.vue';
 
 const route = useRoute();
 
-const head = reactive<HeadObject>({
+const head = computed<HeadObject>(() => ({
   title: `${route.meta.name} - IT Tools`,
   meta: [
     {
       name: 'description',
-      content: route.meta.description,
+      content: route.meta?.description as string,
     },
     {
       name: 'keywords',
-      content: route.meta.keywords,
+      content: ((route.meta.keywords ?? []) as string[]).join(','),
     },
   ],
-});
+}));
 useHead(head);
 </script>
 
@@ -27,8 +29,18 @@ useHead(head);
   <base-layout>
     <div class="tool-layout">
       <div class="tool-header">
-        <n-h1>{{ route.meta.name }}</n-h1>
+        <n-space align="center" justify="space-between" :wrap="false">
+          <n-h1>
+            {{ route.meta.name }}
+          </n-h1>
+
+          <div>
+            <favorite-button :tool="{name: route.meta.name} as Tool" />
+          </div>
+        </n-space>
+
         <div class="separator" />
+
         <div class="description">
           {{ route.meta.description }}
         </div>
@@ -76,6 +88,7 @@ useHead(head);
       width: 200px;
       height: 2px;
       background: rgb(161, 161, 161);
+      opacity: 0.2;
 
       margin: 10px 0;
     }

@@ -1,5 +1,5 @@
 <template>
-  <n-card>
+  <c-card>
     <n-form-item label="Paragraphs" :show-feedback="false" label-width="200" label-placement="left">
       <n-slider v-model:value="paragraphs" :step="1" :min="1" :max="20" />
     </n-form-item>
@@ -16,22 +16,19 @@
       <n-switch v-model:value="asHTML" />
     </n-form-item>
 
-    <br />
+    <n-input :value="loremIpsumText" type="textarea" placeholder="Your lorem ipsum..." readonly autosize mt-5 />
 
-    <n-input :value="loremIpsumText" type="textarea" placeholder="Your lorem ipsum..." autosize readonly />
-    <br />
-    <br />
-    <n-space justify="center">
-      <n-button secondary autofocus @click="copy"> Copy </n-button>
+    <n-space justify="center" mt-5>
+      <c-button autofocus @click="copy"> Copy </c-button>
     </n-space>
-  </n-card>
+  </c-card>
 </template>
 
 <script setup lang="ts">
 import { useCopy } from '@/composable/copy';
 import { ref, computed } from 'vue';
-import { generateLoremIpsum } from './lorem-ipsum-generator.service';
 import { randIntFromInterval } from '@/utils/random';
+import { generateLoremIpsum } from './lorem-ipsum-generator.service';
 
 const paragraphs = ref(1);
 const sentences = ref([3, 8]);

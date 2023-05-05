@@ -1,10 +1,15 @@
 <template>
-  <n-card>
+  <c-card>
     <n-grid x-gap="12" y-gap="12" cols="1 600:3">
       <n-gi span="2">
         <n-form label-width="130" label-placement="left">
           <n-form-item label="Text:">
-            <n-input v-model:value="text" placeholder="Your link or text..." />
+            <n-input
+              v-model:value="text"
+              type="textarea"
+              :autosize="{ minRows: 1 }"
+              placeholder="Your link or text..."
+            />
           </n-form-item>
           <n-form-item label="Foreground color:">
             <n-color-picker v-model:value="foreground" :modes="['hex']" />
@@ -23,18 +28,18 @@
       <n-gi>
         <n-space justify="center" align="center" vertical>
           <n-image :src="qrcode" width="200" />
-          <n-button secondary @click="download"> Download qr-code </n-button>
+          <c-button @click="download"> Download qr-code </c-button>
         </n-space>
       </n-gi>
     </n-grid>
-  </n-card>
+  </c-card>
 </template>
 
 <script setup lang="ts">
 import { useDownloadFileFromBase64 } from '@/composable/downloadBase64';
-import { useQRCode } from './useQRCode';
 import { ref } from 'vue';
 import type { QRCodeErrorCorrectionLevel } from 'qrcode';
+import { useQRCode } from './useQRCode';
 
 const foreground = ref('#000000ff');
 const background = ref('#ffffffff');

@@ -1,5 +1,5 @@
 <template>
-  <n-card title="Encode">
+  <c-card title="Encode">
     <n-form-item
       label="Your string :"
       :feedback="encodedValidation.message"
@@ -24,10 +24,10 @@
     </n-form-item>
 
     <n-space justify="center">
-      <n-button secondary @click="copyEncoded"> Copy </n-button>
+      <c-button @click="copyEncoded"> Copy </c-button>
     </n-space>
-  </n-card>
-  <n-card title="Decode">
+  </c-card>
+  <c-card title="Decode">
     <n-form-item
       label="Your encoded string :"
       :feedback="decodeValidation.message"
@@ -52,37 +52,26 @@
     </n-form-item>
 
     <n-space justify="center">
-      <n-button secondary @click="copyDecoded"> Copy </n-button>
+      <c-button @click="copyDecoded"> Copy </c-button>
     </n-space>
-  </n-card>
+  </c-card>
 </template>
 
 <script setup lang="ts">
 import { useCopy } from '@/composable/copy';
 import { useValidation } from '@/composable/validation';
+import { isNotThrowing } from '@/utils/boolean';
+import { withDefaultOnError } from '@/utils/defaults';
 import { computed, ref } from 'vue';
 
 const encodeInput = ref('Hello world :)');
-const encodeOutput = computed(() => {
-  try {
-    return encodeURIComponent(encodeInput.value);
-  } catch (_) {
-    return '';
-  }
-});
+const encodeOutput = computed(() => withDefaultOnError(() => encodeURIComponent(encodeInput.value), ''));
 
 const encodedValidation = useValidation({
   source: encodeInput,
   rules: [
     {
-      validator: (value) => {
-        try {
-          encodeURIComponent(value);
-          return true;
-        } catch (_) {
-          return false;
-        }
-      },
+      validator: (value) => isNotThrowing(() => encodeURIComponent(value)),
       message: 'Impossible to parse this string',
     },
   ],
@@ -91,27 +80,13 @@ const encodedValidation = useValidation({
 const { copy: copyEncoded } = useCopy({ source: encodeOutput, text: 'Encoded string copied to the clipboard' });
 
 const decodeInput = ref('Hello%20world%20%3A)');
-
-const decodeOutput = computed(() => {
-  try {
-    return decodeURIComponent(decodeInput.value);
-  } catch (_) {
-    return '';
-  }
-});
+const decodeOutput = computed(() => withDefaultOnError(() => decodeURIComponent(decodeInput.value), ''));
 
 const decodeValidation = useValidation({
   source: encodeInput,
   rules: [
     {
-      validator: (value) => {
-        try {
-          decodeURIComponent(value);
-          return true;
-        } catch (_) {
-          return false;
-        }
-      },
+      validator: (value) => isNotThrowing(() => decodeURIComponent(value)),
       message: 'Impossible to parse this string',
     },
   ],

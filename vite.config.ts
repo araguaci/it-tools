@@ -6,10 +6,29 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import markdown from 'vite-plugin-md';
 import svgLoader from 'vite-svg-loader';
 import { VitePWA } from 'vite-plugin-pwa';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
+import Unocss from 'unocss/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    AutoImport({
+      imports: [
+        'vue',
+        'vue-router',
+        '@vueuse/core',
+        {
+          'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
+        },
+      ],
+      vueTemplate: true,
+      eslintrc: {
+        enabled: true,
+      },
+    }),
+
     vue({
       include: [/\.vue$/, /\.md$/],
     }),
@@ -53,6 +72,13 @@ export default defineConfig({
         ],
       },
     }),
+    Components({
+      dirs: ['src/'],
+      extensions: ['vue', 'md'],
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      resolvers: [NaiveUiResolver()],
+    }),
+    Unocss(),
   ],
   resolve: {
     alias: {
@@ -61,6 +87,5 @@ export default defineConfig({
   },
   define: {
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(process.env.npm_package_version),
-    'import.meta.env.GIT_SHORT_SHA': JSON.stringify((process?.env?.VITE_VERCEL_GIT_COMMIT_SHA ?? '').slice(0, 7)),
   },
 });

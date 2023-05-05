@@ -1,10 +1,11 @@
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
 import { mkdir, readFile, writeFile } from 'fs/promises';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
 const currentDirname = dirname(fileURLToPath(import.meta.url));
 
 const toolsDir = join(currentDirname, '..', 'src', 'tools');
+// eslint-disable-next-line no-undef
 const toolName = process.argv[2];
 
 if (!toolName) {
@@ -28,9 +29,9 @@ createToolFile(
   `${toolName}.vue`,
   `
 <template>
-  <n-card>
+  <div>
     Lorem ipsum
-  </n-card>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -39,24 +40,25 @@ createToolFile(
 
 <style lang="less" scoped>
 </style>
-`
+`,
 );
 
 createToolFile(
   `index.ts`,
   `
 import { ArrowsShuffle } from '@vicons/tabler';
-import type { ITool } from './../Tool';
+import { defineTool } from '../tool';
 
-export const tool: ITool = {
+export const tool = defineTool({
   name: '${toolNameTitleCase}',
   path: '/${toolName}',
   description: '',
   keywords: ['${toolName.split('-').join("', '")}'],
   component: () => import('./${toolName}.vue'),
   icon: ArrowsShuffle,
-};
-`
+  createdAt: new Date('${new Date().toISOString().split('T')[0]}'),
+});
+`,
 );
 
 createToolFile(`${toolName}.service.ts`, ``);
@@ -69,7 +71,29 @@ import { expect, describe, it } from 'vitest';
 // describe('${toolName}', () => {
 //
 // })
-`
+`,
+);
+
+createToolFile(
+  `${toolName}.e2e.spec.ts`,
+  `
+import { test, expect } from '@playwright/test';
+
+test.describe('Tool - ${toolNameTitleCase}', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/${toolName}');
+  });
+
+  test('Has correct title', async ({ page }) => {
+    await expect(page).toHaveTitle('${toolNameTitleCase} - IT Tools');
+  });
+
+  test('', async ({ page }) => {
+
+  });
+});
+  
+`,
 );
 
 const toolsIndex = join(toolsDir, 'index.ts');

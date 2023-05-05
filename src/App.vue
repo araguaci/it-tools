@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { layouts } from './layouts';
 import { computed } from 'vue';
 import { useRoute, RouterView } from 'vue-router';
+import { darkTheme, NGlobalStyle, NMessageProvider, NNotificationProvider } from 'naive-ui';
 import { darkThemeOverrides, lightThemeOverrides } from './themes';
-import { darkTheme, NGlobalStyle, NMessageProvider } from 'naive-ui';
+import { layouts } from './layouts';
 import { useStyleStore } from './stores/style.store';
 
 const route = useRoute();
@@ -18,9 +18,11 @@ const themeOverrides = computed(() => (styleStore.isDarkTheme ? darkThemeOverrid
   <n-config-provider :theme="theme" :theme-overrides="themeOverrides">
     <n-global-style />
     <n-message-provider placement="bottom">
-      <component :is="layout">
-        <router-view />
-      </component>
+      <n-notification-provider placement="bottom-right">
+        <component :is="layout">
+          <router-view />
+        </component>
+      </n-notification-provider>
     </n-message-provider>
   </n-config-provider>
 </template>

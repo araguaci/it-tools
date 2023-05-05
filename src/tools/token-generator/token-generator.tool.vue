@@ -1,6 +1,6 @@
 <template>
   <div>
-    <n-card>
+    <c-card>
       <n-form label-placement="left" label-width="140">
         <n-space justify="center" item-style="padding: 0" :size="0">
           <div>
@@ -41,41 +41,36 @@
         autocapitalize="off"
         spellcheck="false"
       />
-      <br />
-      <br />
-      <n-space justify="center">
-        <n-button secondary autofocus @click="copy"> Copy </n-button>
-        <n-button secondary @click="refreshToken"> Refresh </n-button>
+
+      <n-space justify="center" mt-5>
+        <c-button @click="copy"> Copy </c-button>
+        <c-button @click="refreshToken"> Refresh </c-button>
       </n-space>
-    </n-card>
+    </c-card>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useCopy } from '@/composable/copy';
-import { ref, watch } from 'vue';
+import { useQueryParam } from '@/composable/queryParams';
+import { computedRefreshable } from '@/composable/computedRefreshable';
 import { createToken } from './token-generator.service';
 
-const token = ref('');
-const length = ref(64);
-const { copy } = useCopy({ source: token, text: 'Token copied to the clipboard' });
+const length = useQueryParam({ name: 'length', defaultValue: 64 });
+const withUppercase = useQueryParam({ name: 'uppercase', defaultValue: true });
+const withLowercase = useQueryParam({ name: 'lowercase', defaultValue: true });
+const withNumbers = useQueryParam({ name: 'numbers', defaultValue: true });
+const withSymbols = useQueryParam({ name: 'symbols', defaultValue: false });
 
-const withUppercase = ref(true);
-const withLowercase = ref(true);
-const withNumbers = ref(true);
-const withSymbols = ref(false);
-
-watch([withUppercase, withLowercase, withNumbers, withSymbols, length], refreshToken);
-
-function refreshToken() {
-  token.value = createToken({
+const [token, refreshToken] = computedRefreshable(() =>
+  createToken({
     length: length.value,
     withUppercase: withUppercase.value,
     withLowercase: withLowercase.value,
     withNumbers: withNumbers.value,
     withSymbols: withSymbols.value,
-  });
-}
+  }),
+);
 
-refreshToken();
+const { copy } = useCopy({ source: token, text: 'Token copied to the clipboard' });
 </script>

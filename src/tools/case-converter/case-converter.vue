@@ -1,5 +1,5 @@
 <template>
-  <n-card>
+  <c-card>
     <n-form label-width="120" label-placement="left" :show-feedback="false">
       <n-form-item label="Your string:">
         <n-input v-model:value="input" />
@@ -8,46 +8,44 @@
       <n-divider />
 
       <n-form-item label="Camelcase:">
-        <input-copyable :value="camelCase(input)" />
+        <input-copyable :value="camelCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Capitalcase:">
-        <input-copyable :value="capitalCase(input)" />
+        <input-copyable :value="capitalCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Constantcase:">
-        <input-copyable :value="constantCase(input)" />
+        <input-copyable :value="constantCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Dotcase:">
-        <input-copyable :value="dotCase(input)" />
+        <input-copyable :value="dotCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Headercase:">
-        <input-copyable :value="headerCase(input)" />
+        <input-copyable :value="headerCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Nocase:">
-        <input-copyable :value="noCase(input)" />
+        <input-copyable :value="noCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Paramcase:">
-        <input-copyable :value="paramCase(input)" />
+        <input-copyable :value="paramCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Pascalcase:">
-        <input-copyable :value="pascalCase(input)" />
+        <input-copyable :value="pascalCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Pathcase:">
-        <input-copyable :value="pathCase(input)" />
+        <input-copyable :value="pathCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Sentencecase:">
-        <input-copyable :value="sentenceCase(input)" />
+        <input-copyable :value="sentenceCase(input, baseConfig)" />
       </n-form-item>
       <n-form-item label="Snakecase:">
-        <input-copyable :value="snakeCase(input)" />
+        <input-copyable :value="snakeCase(input, baseConfig)" />
       </n-form-item>
     </n-form>
-  </n-card>
+  </c-card>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import InputCopyable from '../../components/InputCopyable.vue';
-
 import {
   camelCase,
   capitalCase,
@@ -61,6 +59,11 @@ import {
   sentenceCase,
   snakeCase,
 } from 'change-case';
+import InputCopyable from '../../components/InputCopyable.vue';
+
+const baseConfig = {
+  stripRegexp: /[^A-Za-zÀ-ÖØ-öø-ÿ]+/gi,
+};
 
 const input = ref('lorem ipsum dolor sit amet');
 </script>

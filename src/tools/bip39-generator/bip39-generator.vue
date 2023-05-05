@@ -1,82 +1,82 @@
 <template>
   <div>
-    <n-card>
-      <n-grid cols="3" x-gap="12">
-        <n-gi span="1">
-          <n-form-item label="Language:">
-            <n-select
-              v-model:value="language"
-              :options="Object.keys(languages).map((label) => ({ label, value: label }))"
-            />
-          </n-form-item>
-        </n-gi>
-        <n-gi span="2">
-          <n-form-item
-            label="Entropy (seed):"
-            :feedback="entropyValidation.message"
-            :validation-status="entropyValidation.status"
-          >
-            <n-input-group>
-              <n-input v-model:value="entropy" placeholder="Your string..." />
-              <n-button @click="refreshEntropy">
-                <n-icon size="22">
-                  <Refresh />
-                </n-icon>
-              </n-button>
-              <n-button @click="copyEntropy">
-                <n-icon size="22">
-                  <Copy />
-                </n-icon>
-              </n-button>
-            </n-input-group>
-          </n-form-item>
-        </n-gi>
-      </n-grid>
-      <n-form-item
-        label="Passphrase (mnemonic):"
-        :feedback="mnemonicValidation.message"
-        :validation-status="mnemonicValidation.status"
-      >
-        <n-input-group>
-          <n-input
-            v-model:value="passphrase"
-            style="text-align: center; flex: 1"
-            placeholder="Your mnemonic..."
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="false"
+    <n-grid cols="3" x-gap="12">
+      <n-gi span="1">
+        <n-form-item label="Language:">
+          <n-select
+            v-model:value="language"
+            :options="Object.keys(languages).map((label) => ({ label, value: label }))"
           />
+        </n-form-item>
+      </n-gi>
+      <n-gi span="2">
+        <n-form-item
+          label="Entropy (seed):"
+          :feedback="entropyValidation.message"
+          :validation-status="entropyValidation.status"
+        >
+          <n-input-group>
+            <n-input v-model:value="entropy" placeholder="Your string..." />
+            <c-button @click="refreshEntropy">
+              <n-icon size="22">
+                <Refresh />
+              </n-icon>
+            </c-button>
+            <c-button @click="copyEntropy">
+              <n-icon size="22">
+                <Copy />
+              </n-icon>
+            </c-button>
+          </n-input-group>
+        </n-form-item>
+      </n-gi>
+    </n-grid>
+    <n-form-item
+      label="Passphrase (mnemonic):"
+      :feedback="mnemonicValidation.message"
+      :validation-status="mnemonicValidation.status"
+    >
+      <n-input-group>
+        <n-input
+          v-model:value="passphrase"
+          style="text-align: center; flex: 1"
+          placeholder="Your mnemonic..."
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        />
 
-          <n-button @click="copyPassphrase">
-            <n-icon size="22" :component="Copy" />
-          </n-button>
-        </n-input-group>
-      </n-form-item>
-    </n-card>
+        <c-button @click="copyPassphrase">
+          <n-icon size="22" :component="Copy" />
+        </c-button>
+      </n-input-group>
+    </n-form-item>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useCopy } from '@/composable/copy';
-import { ref, computed } from 'vue';
+import { useValidation } from '@/composable/validation';
+import { isNotThrowing } from '@/utils/boolean';
+import { withDefaultOnError } from '@/utils/defaults';
 import {
-  entropyToMnemonic,
-  englishWordList,
   chineseSimplifiedWordList,
   chineseTraditionalWordList,
   czechWordList,
+  englishWordList,
+  entropyToMnemonic,
   frenchWordList,
+  generateEntropy,
   italianWordList,
   japaneseWordList,
   koreanWordList,
+  mnemonicToEntropy,
   portugueseWordList,
   spanishWordList,
-  generateEntropy,
-  mnemonicToEntropy,
 } from '@it-tools/bip39';
 import { Copy, Refresh } from '@vicons/tabler';
-import { useValidation } from '@/composable/validation';
+import { computed, ref } from 'vue';
 
 const languages = {
   English: englishWordList,
@@ -97,20 +97,11 @@ const passphraseInput = ref('');
 const language = ref<keyof typeof languages>('English');
 const passphrase = computed({
   get() {
-    try {
-      return entropyToMnemonic(entropy.value, languages[language.value]);
-    } catch (_) {
-      return passphraseInput.value;
-    }
+    return withDefaultOnError(() => entropyToMnemonic(entropy.value, languages[language.value]), passphraseInput.value);
   },
   set(value: string) {
     passphraseInput.value = value;
-
-    try {
-      entropy.value = mnemonicToEntropy(value, languages[language.value]);
-    } catch (_) {
-      entropy.value = '';
-    }
+    entropy.value = withDefaultOnError(() => mnemonicToEntropy(value, languages[language.value]), '');
   },
 });
 
@@ -123,7 +114,7 @@ const entropyValidation = useValidation({
     },
     {
       validator: (value) => /^[a-fA-F0-9]*$/.test(value),
-      message: 'Entropy should an hexadecimal number',
+      message: 'Entropy should be an hexadecimal string',
     },
   ],
 });
@@ -132,14 +123,7 @@ const mnemonicValidation = useValidation({
   source: passphrase,
   rules: [
     {
-      validator: (value) => {
-        try {
-          mnemonicToEntropy(value);
-          return true;
-        } catch (_) {
-          return false;
-        }
-      },
+      validator: (value) => isNotThrowing(() => mnemonicToEntropy(value, languages[language.value])),
       message: 'Invalid mnemonic',
     },
   ],

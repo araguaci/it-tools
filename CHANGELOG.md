@@ -2,249 +2,73 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [2.4.1](https://github.com/CorentinTh/it-tools/compare/v2.4.0...v2.4.1) (2022-05-15)
-
-
-### Bug Fixes
-
-* **seo:** wrong url in share metas ([a88e4a9](https://github.com/CorentinTh/it-tools/commit/a88e4a9289e7d8cc80190f60f2fe08fe2ba08ee6))
-
-
-### Refactors
-
-* **json-viewer:** add clear button ([048bc4a](https://github.com/CorentinTh/it-tools/commit/048bc4ae943509dea2946764efaa69f845b6c478))
-* **seo:** changed title string ([d4ea393](https://github.com/CorentinTh/it-tools/commit/d4ea393c1df87ae958a06ed66a11e36b081282d4))
-
-## [2.4.0](https://github.com/CorentinTh/it-tools/compare/v2.3.2...v2.4.0) (2022-05-14)
-
+## Version 2023.04.23-92bd835
 
 ### Features
+- **ui-lib**: demo pages for c-lib components (92bd835)
+- **new-tool**: diff of two json objects (362f2fa)
+- **ipv4-range-expander**: expands a given IPv4 start and end address to a valid IPv4 subnet (#366) (df989e2)
+- **date converter**: auto focus main input (6d22025)
 
-* catch throw on validation ([a60f64f](https://github.com/CorentinTh/it-tools/commit/a60f64f74417f811204121f97c16cdb4754afc3b))
-* **hash-text:** compute all hashes at the same time ([#242](https://github.com/CorentinTh/it-tools/issues/242)) ([e9cc499](https://github.com/CorentinTh/it-tools/commit/e9cc499ed87ba926086323223c7eca4f6658b3f0))
-* **new-tool:**  json viewer ([d356b14](https://github.com/CorentinTh/it-tools/commit/d356b1488fc640a4f5b65d62e0f2f368f5941996))
-* **seo:** added cannonical meta ([34bc6a5](https://github.com/CorentinTh/it-tools/commit/34bc6a57a7bab98ff2a630d02034c342084e0af9))
+### Bug fixes
+- **ts**: cleaned legacy typechecking warning (e88c1d5)
+- **mac-address-lookup**: added copy handler on button click (c311e38)
 
+### Refactoring
+- **ui-lib**: prevent c-button to shrink (61ece23)
+- **ui**: replaced naive ui cards with custom ones (f080933)
+- **clean**: removed unused lodash import (bb32513)
+- **clean**: removed useless br tags (74073f5)
+- **ui**: getting ride of naive ui buttons (c45bce3)
 
-### Bug Fixes
-
-* **lint:** missing new lines ([3cfc5f8](https://github.com/CorentinTh/it-tools/commit/3cfc5f8bc27b66e6fbb6054f3c909818083ebc37))
-* update recommended extension ids ([#244](https://github.com/CorentinTh/it-tools/issues/244)) ([1d7032d](https://github.com/CorentinTh/it-tools/commit/1d7032d0268220f594de6d837a303fc1e63cbd9f))
-
-
-### Documentation
-
-* added producthunt banners ([4c4da16](https://github.com/CorentinTh/it-tools/commit/4c4da16970e1dbb13705d8b6c020cd40cd2b5e0d))
-
-
-### Refactors
-
-* **base-layout:** renammed one letter variable ([383d975](https://github.com/CorentinTh/it-tools/commit/383d97569580c4f31448c07cb97e3778bc97a8af))
-* **date-converter:** mutualised and dry-ed code ([d2c767f](https://github.com/CorentinTh/it-tools/commit/d2c767f0922e9b93172c3167226ad3db5499b9f6))
-* **seo:** changed title string ([c3b6132](https://github.com/CorentinTh/it-tools/commit/c3b6132c261bd5952bafb1ff1e576eb13d2d0a7d))
-* updated description ([b89db3c](https://github.com/CorentinTh/it-tools/commit/b89db3c8d0de601fecbd2f9f79492dff1b461bd8))
-
-### [2.3.2](https://github.com/CorentinTh/it-tools/compare/v2.3.1...v2.3.2) (2022-05-09)
-
-
-### Bug Fixes
-
-* **base-converter:** responsive input ([0b0cbd5](https://github.com/CorentinTh/it-tools/commit/0b0cbd55c3809ded2eedfa0b2238bc950b01516a))
-* **base64-converter:** async onUpload callback ([84cf1bb](https://github.com/CorentinTh/it-tools/commit/84cf1bb9645c5ae31579098df59471f7d99f6f0c))
-* **typo:** misspelings ([9755e51](https://github.com/CorentinTh/it-tools/commit/9755e51fe216e5e25c56417152e70cb5bce26b11))
-
-
-### Refactors
-
-* **responsive:** row layout for multicards on big screens ([e21230b](https://github.com/CorentinTh/it-tools/commit/e21230bbd9550ba3315607b021a60a4f9f9e1b61))
-
-### [2.3.1](https://github.com/CorentinTh/it-tools/compare/v2.3.0...v2.3.1) (2022-04-24)
-
-
-### Refactors
-
-* changed twitter account handler ([608ec3a](https://github.com/CorentinTh/it-tools/commit/608ec3a81db6583c8a2bf126b3868afd043c6981))
-
-## [2.3.0](https://github.com/CorentinTh/it-tools/compare/v2.2.0...v2.3.0) (2022-04-22)
-
+## Version 2023.04.14-dbad773
 
 ### Features
+- **new-tool**: http status codes (8355bd2)
 
-* **new-tool:** html entities escape/unescape ([8e29a97](https://github.com/CorentinTh/it-tools/commit/8e29a97404ea0aa9b9b576656358c8c276b6f992))
+### Refactoring
+- **uuid-generator**: prevent NaN in quantity (6fb4994)
 
+### Chores
+- **release**: create a github release on new version (dbad773)
+- **version**: reset CHANGELOG content to support new format (85cb0ff)
 
-### Bug Fixes
-
-* **head:** added titles for non-tool pages ([0a15892](https://github.com/CorentinTh/it-tools/commit/0a15892dde9852ff158a8fcb72d0ad6bae8bad02))
-* **sider:** default collapsed value ([b22aa94](https://github.com/CorentinTh/it-tools/commit/b22aa941f52009118d4d3cc98277cc4c402a4c77))
-* **sider:** missing href for link in footer ([c4dabcc](https://github.com/CorentinTh/it-tools/commit/c4dabccdaeac9d03163ac2588599b000e4e74562))
-* **style:** hard width for group labels ([ebf6695](https://github.com/CorentinTh/it-tools/commit/ebf6695d2533db6f37b24dc7d338f422c551c8cb))
-* **url-parser:** cleaned weird margins on dark mode ([005ebfb](https://github.com/CorentinTh/it-tools/commit/005ebfba318ece1a9c04aefb737baed5d7aafb91))
-
-
-### Refactors
-
-* **lint:** linter auto fix ([086d31e](https://github.com/CorentinTh/it-tools/commit/086d31eab5b3b1a927803eab5e650585f61abe19))
-* removed useless ref and value ([b12cbe4](https://github.com/CorentinTh/it-tools/commit/b12cbe412407389186a58e4ceaa94f5b441c11ea))
-
-### [2.2.1](https://github.com/CorentinTh/it-tools/compare/v2.2.0...v2.2.1) (2022-04-21)
-
-
-### Bug Fixes
-
-* **head:** added titles for non-tool pages ([0a15892](https://github.com/CorentinTh/it-tools/commit/0a15892dde9852ff158a8fcb72d0ad6bae8bad02))
-* **sider:** missing href for link in footer ([c4dabcc](https://github.com/CorentinTh/it-tools/commit/c4dabccdaeac9d03163ac2588599b000e4e74562))
-* **style:** hard width for group labels ([ebf6695](https://github.com/CorentinTh/it-tools/commit/ebf6695d2533db6f37b24dc7d338f422c551c8cb))
-* **url-parser:** cleaned weird margins on dark mode ([005ebfb](https://github.com/CorentinTh/it-tools/commit/005ebfba318ece1a9c04aefb737baed5d7aafb91))
-
-## [2.2.0](https://github.com/CorentinTh/it-tools/compare/v2.1.0...v2.2.0) (2022-04-18)
-
+## Version 2023.04.14-f9b77b7
 
 ### Features
+- **new-tool**: http status codes (8355bd2)
 
-* **new-tool:** url parser ([2b38d6f](https://github.com/CorentinTh/it-tools/commit/2b38d6f81e34845f896b858513e35209cba29f98))
+### Refactoring
+- **uuid-generator**: prevent NaN in quantity (6fb4994)
 
+### Chores
+- **release**: create a github release on new version (f9b77b7)
+- **version**: reset CHANGELOG content to support new format (85cb0ff)
 
-### Bug Fixes
-
-* **sider-footer:** fixed commit sha url ([ed9046d](https://github.com/CorentinTh/it-tools/commit/ed9046d3e1f5a7dc01c722ed139a2ae477a2d48f))
-
-## [2.1.0](https://github.com/CorentinTh/it-tools/compare/v2.0.2...v2.1.0) (2022-04-18)
-
-
-### Features
-
-* **new-tool:** bcrypt ([6d5856f](https://github.com/CorentinTh/it-tools/commit/6d5856fa93d1ffbf71856c75adc24ad87dc4b49b))
-* **new-tool:** device information ([277bd5f](https://github.com/CorentinTh/it-tools/commit/277bd5f0da359fd54c5164b376007d182a9fabde))
-
-
-### Refactors
-
-* **menu:** removed burger menu icon tooltip ([09abffb](https://github.com/CorentinTh/it-tools/commit/09abffbcf9b09cb5adc34f8754b019d0c8b60854))
-
-### [2.0.2](https://github.com/CorentinTh/it-tools/compare/v2.0.1...v2.0.2) (2022-04-18)
-
-
-### Bug Fixes
-
-* **git-memo:** pre scroll on overflow ([4fc303e](https://github.com/CorentinTh/it-tools/commit/4fc303e5e3f0bef9201cc002963e244a5d3be7b5))
-* **menu:** menu auto closed on mobile ([71f79a5](https://github.com/CorentinTh/it-tools/commit/71f79a5bbfe0dd5451a435c0a55e8b77ee7d3848))
-* **qr-code:** responsive layout ([cbf0b3d](https://github.com/CorentinTh/it-tools/commit/cbf0b3d6995e47d371a8fbcfccd65ba304fb08dc))
-
-
-### Refactors
-
-* **crontab:** list instead of table on small screen ([6b11de2](https://github.com/CorentinTh/it-tools/commit/6b11de258a8039fe7729130ede35d47592be7cbe))
-* removed empty sources ([a14cac6](https://github.com/CorentinTh/it-tools/commit/a14cac6d5c5967a47ca76a1d1a420115114c3bbf))
-* throw an error object instead of string ([4112fa5](https://github.com/CorentinTh/it-tools/commit/4112fa532e3d4be190d52bf3b11e0d4c3625a402))
-
-### [2.0.1](https://github.com/CorentinTh/it-tools/compare/v2.0.0...v2.0.1) (2022-04-16)
-
+## Version 2023.04.14-2f0d239
 
 ### Features
+- **new-tool**: http status codes (8355bd2)
 
-* **config:** added vercel.json ([2e046ad](https://github.com/CorentinTh/it-tools/commit/2e046ad09fed4a55bbf4449e3683a4150839c461))
+### Refactoring
+- **uuid-generator**: prevent NaN in quantity (6fb4994)
 
+### Chores
+- **release**: create a github release on new version (2f0d239)
+- **version**: reset CHANGELOG content to support new format (85cb0ff)
 
-### Bug Fixes
-
-* remove duplicate property ([d066319](https://github.com/CorentinTh/it-tools/commit/d066319b45dee35df0212c7ff407013bd7449ae3))
-* **style:** url encode/decode layout ([34480b4](https://github.com/CorentinTh/it-tools/commit/34480b4e25ffc33536b03a0ba711c480219ad553))
-
-
-### Documentation
-
-* updated description ([70a3df0](https://github.com/CorentinTh/it-tools/commit/70a3df044ea86ac35c1839ac5ab624f694fdd845))
-
-
-### Refactors
-
-* clean imports ([724e142](https://github.com/CorentinTh/it-tools/commit/724e142222202798ea3df7d0fb34da1e7a5216a1))
-* lint fix ([a58ae24](https://github.com/CorentinTh/it-tools/commit/a58ae24d9409728ac12fb780f2c64643087de5be))
-* ref name ([5828085](https://github.com/CorentinTh/it-tools/commit/582808597c6aadf0feb48f6aae0a29b839e0dd54))
-
-## 2.0.0 (2022-04-16)
-
+## Version 2023.04.14-474cae4
 
 ### Features
+- **new-tool**: http status codes (8355bd2)
 
-* **a11y:** aria-label on icon button ([5f50275](https://github.com/CorentinTh/it-tools/commit/5f502755d69ab21a78d9256db8a1c64f1ab82c2a))
-* added commit short sha ([668625c](https://github.com/CorentinTh/it-tools/commit/668625c6dab6e8b98f363df6c0aa3bf00a3afaa4))
-* added plausible tracker ([0808920](https://github.com/CorentinTh/it-tools/commit/0808920951b55c938537f33353a37ece96b04084))
-* added twitter link ([d126abc](https://github.com/CorentinTh/it-tools/commit/d126abc7b12a9fce778fe9883e44dca581509778))
-* footer in sider ([3f03850](https://github.com/CorentinTh/it-tools/commit/3f038503dd705ba3a5562a1e8f85a3b0e7d0be5b))
-* **layout:** menu category ([9c9be9e](https://github.com/CorentinTh/it-tools/commit/9c9be9e2e2e2c856d1af1df9d9d37a64460cd82b))
-* mobile friendly menu ([1e67fa6](https://github.com/CorentinTh/it-tools/commit/1e67fa6e0bede8c055d9e4cb9bf7f97423bc9bdf))
-* **navbar:** added github link ([d4e226e](https://github.com/CorentinTh/it-tools/commit/d4e226e09face78da794fa7e676eef85d05dde75))
-* **nav:** navigation tooltips ([b892f50](https://github.com/CorentinTh/it-tools/commit/b892f50cd633d42e6261be208bd077d92d336afb))
-* **page:** added 404 page ([3db4f91](https://github.com/CorentinTh/it-tools/commit/3db4f91c27a2ab37bb23d8feb77b6dffa9a92977))
-* **page:** home page layout ([57fd14a](https://github.com/CorentinTh/it-tools/commit/57fd14a199a253f49f3c53810490e5d31512b261))
-* persistent theme selection fallback to prefered theme ([40e9af0](https://github.com/CorentinTh/it-tools/commit/40e9af06cf28b7348152f8ec3898fa2b27ec0b21))
-* **router:** added legacy routes redirections ([dbce46b](https://github.com/CorentinTh/it-tools/commit/dbce46b470b0187a395cdd350a023641c6319582))
-* search-bar ([e8594de](https://github.com/CorentinTh/it-tools/commit/e8594de7b45102b8bc1cfb82d0839e3722d9c4c2))
-* **search:** round and clearable searchbar ([b112f5f](https://github.com/CorentinTh/it-tools/commit/b112f5f226c6b03151bbeb4fc607e449c444e667))
-* **seo:** added robots.txt and humans.txt ([cd9a3bc](https://github.com/CorentinTh/it-tools/commit/cd9a3bc9b10cf7363301e9a0d0b17f38ea640e0c))
-* **seo:** added title + description ([5f74037](https://github.com/CorentinTh/it-tools/commit/5f74037105c5e8efc5bdad2261597458cfcf26d3))
-* **seo:** pwa and icons ([b7193e8](https://github.com/CorentinTh/it-tools/commit/b7193e838ba83d0548211cff922e107a1f11f90f))
-* **share:** social image ([39746e0](https://github.com/CorentinTh/it-tools/commit/39746e07c53c22ac132ad2aaf25dd71bb6458cde))
-* **style:** dark mode ([3e92b7f](https://github.com/CorentinTh/it-tools/commit/3e92b7f1e04a709df231fce22801b55619e8faab))
-* **style:** theme overrides ([d542688](https://github.com/CorentinTh/it-tools/commit/d542688664cc9c675d1d26f4278a25f1b9e3f28d))
-* **tool:** add lch in color converter ([b5243c4](https://github.com/CorentinTh/it-tools/commit/b5243c43638f37a2d727b015bba61fab0d1b9fe9))
-* **tool:** added token generator ([40dec52](https://github.com/CorentinTh/it-tools/commit/40dec52c8467fd27eb8f3857ed72746ebaa4f509))
-* **tool:** base converter ([034c686](https://github.com/CorentinTh/it-tools/commit/034c686896d0443ea587cd152535b2227234c011))
-* **tool:** base64 string converter ([203b6a9](https://github.com/CorentinTh/it-tools/commit/203b6a9d73dcb30182b130de59920534e18b76b4))
-* **tool:** bip39-generator ([d55329f](https://github.com/CorentinTh/it-tools/commit/d55329f3abc3d3f8ad48def7d7f63b44cd768e27))
-* **tool:** bip39-generator ([765c010](https://github.com/CorentinTh/it-tools/commit/765c010700c07b2809daef0e7c694ac265ce9ddc))
-* **tool:** case converter ([7a7372d](https://github.com/CorentinTh/it-tools/commit/7a7372df191abc7ecd3fee7234d4de7aaaba03f6))
-* **tool:** color converter ([4e50b7a](https://github.com/CorentinTh/it-tools/commit/4e50b7a973e950819a52c127db2a754838cbbf8e))
-* **tool:** crontab generator ([358ff45](https://github.com/CorentinTh/it-tools/commit/358ff45ae1d9822b8a7c342515f668d25b7128b5))
-* **tool:** date-time converter ([2d9cb20](https://github.com/CorentinTh/it-tools/commit/2d9cb209b377326f4bf62067db7d5ad0c7eb7bde))
-* **tool:** encryption ([888ab2c](https://github.com/CorentinTh/it-tools/commit/888ab2cf378597e2880b6dd6a013f3bc192f2b1a))
-* **tool:** git memo ([5cd9997](https://github.com/CorentinTh/it-tools/commit/5cd9997a845f6d5f82d3ae74d3ec12603224517d))
-* **tool:** lorem ipsum generator ([5dcb2ed](https://github.com/CorentinTh/it-tools/commit/5dcb2ed95c318ea1c4134da207c844672d0fbbd8))
-* **tool:** qr-code generator ([5582d75](https://github.com/CorentinTh/it-tools/commit/5582d75927b560d9259929c787c0809634d1f8ae))
-* **tool:** random port generator ([7c540f1](https://github.com/CorentinTh/it-tools/commit/7c540f1208da749c3932aab8f2c392048c4546ae))
-* **tool:** roman-arabic numbers converter ([655019c](https://github.com/CorentinTh/it-tools/commit/655019cf23babcec2a2f1e03cac87744e3139304))
-* **tool:** text hash ([0f3b744](https://github.com/CorentinTh/it-tools/commit/0f3b7445ad1f945d9b364476147bf824ac309a6c))
-* **tool:** text statistics ([0a7c325](https://github.com/CorentinTh/it-tools/commit/0a7c3252e36a4769eedaaec4524b4ee2ae2b19c7))
-* **tool:** url encode/decode ([afac566](https://github.com/CorentinTh/it-tools/commit/afac5664c802c8480fe2c457bcfb7f5e26829cdf))
-* **tool:** uuid v4 generator ([3ae6114](https://github.com/CorentinTh/it-tools/commit/3ae61147a94791987e9e326b19063579976d8dc0))
-* **ux:** copyable input ([1859a9a](https://github.com/CorentinTh/it-tools/commit/1859a9a174010789dcd7ecefb2451e1de7b60b4c))
+### Refactoring
+- **uuid-generator**: prevent NaN in quantity (6fb4994)
 
+### Chores
+- **release**: create a github release on new version (474cae4)
+- **version**: reset CHANGELOG content to support new format (85cb0ff)
 
-### Bug Fixes
+## Version v2023.4.13-dce9ff9
 
-* **hash-text:** added missing toString() ([4ca5fce](https://github.com/CorentinTh/it-tools/commit/4ca5fce911c3312d56bca1ffba863b2f37841c9e))
-* **hash-text:** correct copy message ([bab92ef](https://github.com/CorentinTh/it-tools/commit/bab92ef84f66372df40ce385c2949518ed158427))
-* removed global define ([889d594](https://github.com/CorentinTh/it-tools/commit/889d59499212a449ee460c68c480648e337a7ecb))
-* **style:** working dark mode persistence ([3ae8728](https://github.com/CorentinTh/it-tools/commit/3ae872847b00d65e4e2e629775d479a3333450f1))
-* **validation:** proper rules ([11d8110](https://github.com/CorentinTh/it-tools/commit/11d8110226e22e30ae16d297628c1d252a93be9e))
-
-
-### Refactors
-
-* better icon ([0af7d81](https://github.com/CorentinTh/it-tools/commit/0af7d81abd987aa5d1b0321c25a65131d978e929))
-* **clean:** removed extra console.log ([82606f6](https://github.com/CorentinTh/it-tools/commit/82606f6a477fce2041ab33adc7e95bcba4343e2b))
-* embeded sider scrollbar ([f872972](https://github.com/CorentinTh/it-tools/commit/f872972e69aeb4fde4c17f0c122ca3fd4aa1c56c))
-* icon sizes ([9bb7fc4](https://github.com/CorentinTh/it-tools/commit/9bb7fc47aa70bdc5083d0883f1496fac63f812ea))
-* menu option key ([390ef93](https://github.com/CorentinTh/it-tools/commit/390ef93232dc1b448022a0c09d36367adad9d221))
-* **page:** removed unused import ([f70fce6](https://github.com/CorentinTh/it-tools/commit/f70fce65e20989eb19b0f0976e756a43edf02e9d))
-* removed theme editor ([8559fbd](https://github.com/CorentinTh/it-tools/commit/8559fbd7744fe82b7702a5c0eb77a8d627c5a73d))
-* removed unused files ([c1e7669](https://github.com/CorentinTh/it-tools/commit/c1e76695e4a16b8312ab6031a1bdfb6368946677))
-* removed unused files ([8d9f924](https://github.com/CorentinTh/it-tools/commit/8d9f92417744a5fbd9b4108e851005f23de18b53))
-* **style:** cleaner layout ([1d09a01](https://github.com/CorentinTh/it-tools/commit/1d09a01bb25088493cc9b7f2cb7f8a8aa69ac9e9))
-* **style:** improve style for tool-card ([65a6896](https://github.com/CorentinTh/it-tools/commit/65a6896563d16f30420424e274bd306e3e9182c8))
-* **style:** label width ([fd4426d](https://github.com/CorentinTh/it-tools/commit/fd4426d246ada553528759f761c8192df85c0d44))
-* **style:** menu item height ([8951e87](https://github.com/CorentinTh/it-tools/commit/8951e87c143fda74be32bae5b28e009556d7086e))
-* **style:** menu scrollbar ([483cf66](https://github.com/CorentinTh/it-tools/commit/483cf66db992169d361487c8461938810793b978))
-* **style:** port display ([2632f24](https://github.com/CorentinTh/it-tools/commit/2632f24cc89af7dd12f7a0c1a8b58983a1bb78d8))
-* **style:** removed extra br ([b44539c](https://github.com/CorentinTh/it-tools/commit/b44539c1820defbaaa6dfe83a76c72982a641971))
-* **style:** replaced scss style block to less ([655d9d2](https://github.com/CorentinTh/it-tools/commit/655d9d22e3136bdf1dee29310ab04cf38596bdc8))
-* **style:** responsive layout ([2df3f53](https://github.com/CorentinTh/it-tools/commit/2df3f53b78bbe419763fd359788a4b0b5710e4b7))
-* **style:** updated linter config ([6b58ec5](https://github.com/CorentinTh/it-tools/commit/6b58ec554a0de91139f16d67cec42536d093d5fb))
-
-
-### Documentation
-
-* added new tool creation procedure ([8177883](https://github.com/CorentinTh/it-tools/commit/81778834e6a79725c42eae1772935682ce7580c6))
-* updated readme ([1134e0b](https://github.com/CorentinTh/it-tools/commit/1134e0b822edbc25ce9ff83007bf5d331a1becbd))
+_Diff not available_

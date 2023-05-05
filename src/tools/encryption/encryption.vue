@@ -1,5 +1,5 @@
 <template>
-  <n-card title="Encrypt">
+  <c-card title="Encrypt">
     <n-space item-style="flex: 1 1 0">
       <n-form-item label="Your text:" :show-feedback="false">
         <n-input
@@ -21,8 +21,7 @@
         </n-form-item>
       </n-space>
     </n-space>
-    <br />
-    <n-form-item label="Your text encrypted:" :show-feedback="false">
+    <n-form-item label="Your text encrypted:" :show-feedback="false" mt-5>
       <n-input
         :value="cypherOutput"
         type="textarea"
@@ -35,8 +34,8 @@
         spellcheck="false"
       />
     </n-form-item>
-  </n-card>
-  <n-card title="Decrypt">
+  </c-card>
+  <c-card title="Decrypt">
     <n-space item-style="flex: 1 1 0">
       <n-form-item label="Your encrypted text:" :show-feedback="false">
         <n-input
@@ -58,8 +57,7 @@
         </n-form-item>
       </n-space>
     </n-space>
-    <br />
-    <n-form-item label="Your decrypted text:" :show-feedback="false">
+    <n-form-item label="Your decrypted text:" :show-feedback="false" mt-5>
       <n-input
         :value="decryptOutput"
         type="textarea"
@@ -72,7 +70,7 @@
         spellcheck="false"
       />
     </n-form-item>
-  </n-card>
+  </c-card>
 </template>
 
 <script setup lang="ts">
