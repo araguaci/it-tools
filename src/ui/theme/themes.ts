@@ -2,6 +2,7 @@ import { defineThemes } from './theme.models';
 
 export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
   light: {
+    background: '#ffffff',
     text: {
       baseColor: '#333639',
       mutedColor: '#767c82',
@@ -21,6 +22,7 @@ export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
       color: '#f59e0b',
       colorHover: '#f59e0b',
       colorPressed: '#f59e0b',
+      colorFaded: '#f59e0b2f',
     },
     success: {
       color: '#18a058',
@@ -36,6 +38,7 @@ export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
     },
   },
   dark: {
+    background: '#1e1e1e',
     text: {
       baseColor: '#ffffffd1',
       mutedColor: '#ffffff80',
@@ -55,6 +58,7 @@ export const { themes: appThemes, useTheme: useAppTheme } = defineThemes({
       color: '#f59e0b',
       colorHover: '#f59e0b',
       colorPressed: '#f59e0b',
+      colorFaded: '#f59e0b2f',
     },
     success: {
       color: '#18a058',

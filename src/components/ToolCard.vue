@@ -1,9 +1,22 @@
+<script setup lang="ts">
+import { useThemeVars } from 'naive-ui';
+import FavoriteButton from './FavoriteButton.vue';
+import { useAppTheme } from '@/ui/theme/themes';
+import type { Tool } from '@/tools/tools.types';
+
+const props = defineProps<{ tool: Tool & { category: string } }>();
+const { tool } = toRefs(props);
+const theme = useThemeVars();
+
+const appTheme = useAppTheme();
+</script>
+
 <template>
   <router-link :to="tool.path">
     <c-card class="tool-card">
-      <n-space justify="space-between" align="center">
+      <div flex items-center justify-between>
         <n-icon class="icon" size="40" :component="tool.icon" />
-        <n-space align="center">
+        <div flex items-center gap-8px>
           <n-tag
             v-if="tool.isNew"
             size="small"
@@ -16,9 +29,9 @@
             New
           </n-tag>
 
-          <favorite-button :tool="tool" />
-        </n-space>
-      </n-space>
+          <FavoriteButton :tool="tool" />
+        </div>
+      </div>
       <n-h3 class="title">
         <n-ellipsis>{{ tool.name }}</n-ellipsis>
       </n-h3>
@@ -26,26 +39,12 @@
       <div class="description">
         <n-ellipsis :line-clamp="2" :tooltip="false" style="min-height: 44.78px">
           {{ tool.description }}
-          <br />&nbsp;
+          <br>&nbsp;
         </n-ellipsis>
       </div>
     </c-card>
   </router-link>
 </template>
-
-<script setup lang="ts">
-import type { Tool } from '@/tools/tools.types';
-import { useThemeVars } from 'naive-ui';
-import { toRefs } from 'vue';
-import { useAppTheme } from '@/ui/theme/themes';
-import FavoriteButton from './FavoriteButton.vue';
-
-const props = defineProps<{ tool: Tool & { category: string } }>();
-const { tool } = toRefs(props);
-const theme = useThemeVars();
-
-const appTheme = useAppTheme();
-</script>
 
 <style lang="less" scoped>
 a {

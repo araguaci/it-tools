@@ -1,3 +1,12 @@
+<script lang="ts" setup>
+import _ from 'lodash';
+import { demoRoutes } from './demo.routes';
+
+const route = useRoute();
+
+const componentName = computed(() => _.startCase(String(route.name).replace(/^c-/, '')));
+</script>
+
 <template>
   <div mt-2 w-full p-8>
     <h1>c-lib components</h1>
@@ -18,16 +27,10 @@
       </div>
 
       <div flex-1 pl-4>
+        <h1>{{ componentName }}</h1>
+
         <router-view />
       </div>
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { demoRoutes } from './demo.routes';
-
-const route = useRoute();
-</script>
-
-<style lang="less" scoped></style>

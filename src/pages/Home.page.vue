@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { config } from '@/config';
-import { useToolStore } from '@/tools/tools.store';
 import { Heart } from '@vicons/tabler';
 import { useHead } from '@vueuse/head';
 import ColoredCard from '../components/ColoredCard.vue';
 import ToolCard from '../components/ToolCard.vue';
+import { useToolStore } from '@/tools/tools.store';
+import { config } from '@/config';
 
 const toolStore = useToolStore();
 
 useHead({ title: 'IT Tools - Handy online tools for developers' });
+const { t } = useI18n();
 </script>
 
 <template>
@@ -16,25 +17,23 @@ useHead({ title: 'IT Tools - Handy online tools for developers' });
     <div class="grid-wrapper">
       <n-grid v-if="config.showBanner" x-gap="12" y-gap="12" cols="1 400:2 800:3 1200:4 2000:8">
         <n-gi>
-          <colored-card title="You like it-tools?" :icon="Heart">
+          <ColoredCard title="You like it-tools?" :icon="Heart">
             Give us a star on
             <a
               href="https://github.com/CorentinTh/it-tools"
               rel="noopener"
               target="_blank"
               aria-label="IT-Tools' GitHub repository"
-              >GitHub</a
-            >
+            >GitHub</a>
             or follow us on
             <a
               href="https://twitter.com/ittoolsdottech"
               rel="noopener"
               target="_blank"
               aria-label="IT-Tools' Twitter account"
-              >Twitter</a
-            >! Thank you
+            >Twitter</a>! Thank you
             <n-icon :component="Heart" />
-          </colored-card>
+          </ColoredCard>
         </n-gi>
       </n-grid>
 
@@ -43,17 +42,17 @@ useHead({ title: 'IT Tools - Handy online tools for developers' });
           <n-h3>Your favorite tools</n-h3>
           <n-grid x-gap="12" y-gap="12" cols="1 400:2 800:3 1200:4 2000:8">
             <n-gi v-for="tool in toolStore.favoriteTools" :key="tool.name">
-              <tool-card :tool="tool" />
+              <ToolCard :tool="tool" />
             </n-gi>
           </n-grid>
         </div>
       </transition>
 
       <div v-if="toolStore.newTools.length > 0">
-        <n-h3>Newest tools</n-h3>
+        <n-h3>{{ t('home.categories.newestTools', 'Newest tools') }}</n-h3>
         <n-grid x-gap="12" y-gap="12" cols="1 400:2 800:3 1200:4 2000:8">
           <n-gi v-for="tool in toolStore.newTools" :key="tool.name">
-            <tool-card :tool="tool" />
+            <ToolCard :tool="tool" />
           </n-gi>
         </n-grid>
       </div>
@@ -62,7 +61,7 @@ useHead({ title: 'IT Tools - Handy online tools for developers' });
       <n-grid x-gap="12" y-gap="12" cols="1 400:2 800:3 1200:4 2000:8">
         <n-gi v-for="tool in toolStore.tools" :key="tool.name">
           <transition>
-            <tool-card :tool="tool" />
+            <ToolCard :tool="tool" />
           </transition>
         </n-gi>
       </n-grid>

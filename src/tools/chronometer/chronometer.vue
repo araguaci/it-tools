@@ -1,20 +1,6 @@
-<template>
-  <div>
-    <c-card>
-      <div class="duration">{{ formatMs(counter) }}</div>
-    </c-card>
-    <n-space justify="center" mt-5>
-      <c-button v-if="!isRunning" secondary type="primary" @click="resume">Start</c-button>
-      <c-button v-else secondary type="warning" @click="pause">Stop</c-button>
-
-      <c-button @click="counter = 0">Reset</c-button>
-    </n-space>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { useRafFn } from '@vueuse/core';
-import { ref } from 'vue';
+
 import { formatMs } from './chronometer.service';
 
 const isRunning = ref(false);
@@ -41,6 +27,28 @@ function pause() {
   isRunning.value = false;
 }
 </script>
+
+<template>
+  <div>
+    <c-card>
+      <div class="duration">
+        {{ formatMs(counter) }}
+      </div>
+    </c-card>
+    <div mt-5 flex justify-center gap-3>
+      <c-button v-if="!isRunning" type="primary" @click="resume">
+        Start
+      </c-button>
+      <c-button v-else type="warning" @click="pause">
+        Stop
+      </c-button>
+
+      <c-button @click="counter = 0">
+        Reset
+      </c-button>
+    </div>
+  </div>
+</template>
 
 <style lang="less" scoped>
 .duration {

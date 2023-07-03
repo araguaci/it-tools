@@ -1,25 +1,5 @@
-<template>
-  <c-card v-for="{ name, information } in sections" :key="name" :title="name">
-    <n-grid cols="1 400:2" x-gap="12" y-gap="12">
-      <n-gi v-for="{ label, value: { value } } in information" :key="label" class="information">
-        <div class="label">
-          {{ label }}
-        </div>
-
-        <div class="value">
-          <n-ellipsis v-if="value">
-            {{ value }}
-          </n-ellipsis>
-          <div v-else class="undefined-value">unknown</div>
-        </div>
-      </n-gi>
-    </n-grid>
-  </c-card>
-</template>
-
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
-import { computed } from 'vue';
 
 const { width, height } = useWindowSize();
 
@@ -76,6 +56,27 @@ const sections = [
   },
 ];
 </script>
+
+<template>
+  <c-card v-for="{ name, information } in sections" :key="name" :title="name">
+    <n-grid cols="1 400:2" x-gap="12" y-gap="12">
+      <n-gi v-for="{ label, value: { value } } in information" :key="label" class="information">
+        <div class="label">
+          {{ label }}
+        </div>
+
+        <div class="value">
+          <n-ellipsis v-if="value">
+            {{ value }}
+          </n-ellipsis>
+          <div v-else class="undefined-value">
+            unknown
+          </div>
+        </div>
+      </n-gi>
+    </n-grid>
+  </c-card>
+</template>
 
 <style lang="less" scoped>
 .information {

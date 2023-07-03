@@ -1,81 +1,5 @@
-<template>
-  <c-card title="Encrypt">
-    <n-space item-style="flex: 1 1 0">
-      <n-form-item label="Your text:" :show-feedback="false">
-        <n-input
-          v-model:value="cypherInput"
-          type="textarea"
-          placeholder="The string to cypher"
-          :autosize="{ minRows: 4 }"
-        />
-      </n-form-item>
-      <n-space vertical>
-        <n-form-item label="Your secret key:" :show-feedback="false">
-          <n-input v-model:value="cypherSecret" />
-        </n-form-item>
-        <n-form-item label="Encryption algorithm:" :show-feedback="false">
-          <n-select
-            v-model:value="cypherAlgo"
-            :options="Object.keys(algos).map((label) => ({ label, value: label }))"
-          />
-        </n-form-item>
-      </n-space>
-    </n-space>
-    <n-form-item label="Your text encrypted:" :show-feedback="false" mt-5>
-      <n-input
-        :value="cypherOutput"
-        type="textarea"
-        placeholder="Your string hash"
-        :autosize="{ minRows: 2 }"
-        readonly
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-      />
-    </n-form-item>
-  </c-card>
-  <c-card title="Decrypt">
-    <n-space item-style="flex: 1 1 0">
-      <n-form-item label="Your encrypted text:" :show-feedback="false">
-        <n-input
-          v-model:value="decryptInput"
-          type="textarea"
-          placeholder="The string to cypher"
-          :autosize="{ minRows: 4 }"
-        />
-      </n-form-item>
-      <n-space vertical>
-        <n-form-item label="Your secret key:" :show-feedback="false">
-          <n-input v-model:value="decryptSecret" />
-        </n-form-item>
-        <n-form-item label="Encryption algorithm:" :show-feedback="false">
-          <n-select
-            v-model:value="decryptAlgo"
-            :options="Object.keys(algos).map((label) => ({ label, value: label }))"
-          />
-        </n-form-item>
-      </n-space>
-    </n-space>
-    <n-form-item label="Your decrypted text:" :show-feedback="false" mt-5>
-      <n-input
-        :value="decryptOutput"
-        type="textarea"
-        placeholder="Your string hash"
-        :autosize="{ minRows: 2 }"
-        readonly
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-      />
-    </n-form-item>
-  </c-card>
-</template>
-
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { AES, TripleDES, Rabbit, RC4, enc } from 'crypto-js';
+import { AES, RC4, Rabbit, TripleDES, enc } from 'crypto-js';
 
 const algos = { AES, TripleDES, Rabbit, RC4 };
 
@@ -91,3 +15,62 @@ const decryptOutput = computed(() =>
   algos[decryptAlgo.value].decrypt(decryptInput.value, decryptSecret.value).toString(enc.Utf8),
 );
 </script>
+
+<template>
+  <c-card title="Encrypt">
+    <div flex gap-3>
+      <c-input-text
+        v-model:value="cypherInput"
+        label="Your text:"
+        placeholder="The string to cypher"
+        rows="4"
+        multiline raw-text monospace autosize flex-1
+      />
+      <div flex flex-1 flex-col gap-2>
+        <c-input-text v-model:value="cypherSecret" label="Your secret key:" clearable raw-text />
+
+        <n-form-item label="Encryption algorithm:" :show-feedback="false">
+          <n-select
+            v-model:value="cypherAlgo"
+            :options="Object.keys(algos).map((label) => ({ label, value: label }))"
+          />
+        </n-form-item>
+      </div>
+    </div>
+    <c-input-text
+      label="Your text encrypted:"
+      :value="cypherOutput"
+      rows="3"
+      placeholder="Your string hash"
+      multiline monospace readonly autosize mt-5
+    />
+  </c-card>
+  <c-card title="Decrypt">
+    <div flex gap-3>
+      <c-input-text
+        v-model:value="decryptInput"
+        label="Your encrypted text:"
+        placeholder="The string to cypher"
+        rows="4"
+        multiline raw-text monospace autosize flex-1
+      />
+      <div flex flex-1 flex-col gap-2>
+        <c-input-text v-model:value="decryptSecret" label="Your secret key:" clearable raw-text />
+
+        <n-form-item label="Encryption algorithm:" :show-feedback="false">
+          <n-select
+            v-model:value="decryptAlgo"
+            :options="Object.keys(algos).map((label) => ({ label, value: label }))"
+          />
+        </n-form-item>
+      </div>
+    </div>
+    <c-input-text
+      label="Your decrypted text:"
+      :value="decryptOutput"
+      placeholder="Your string hash"
+      rows="3"
+      multiline monospace readonly autosize mt-5
+    />
+  </c-card>
+</template>

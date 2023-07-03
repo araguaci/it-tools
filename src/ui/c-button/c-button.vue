@@ -1,30 +1,18 @@
-<template>
-  <component
-    :is="tag"
-    :href="href ?? to"
-    class="c-button"
-    :class="{ disabled, round, circle }"
-    :to="to"
-    @click="handleClick"
-  >
-    <slot />
-  </component>
-</template>
-
 <script lang="ts" setup>
 import type { RouteLocationRaw } from 'vue-router';
-import { useTheme } from './c-button.theme';
 import { useAppTheme } from '../theme/themes';
+import { useTheme } from './c-button.theme';
 
 const props = withDefaults(
   defineProps<{
-    type?: 'default' | 'primary';
-    variant?: 'basic' | 'text';
-    disabled?: boolean;
-    round?: boolean;
-    circle?: boolean;
-    href?: string;
-    to?: RouteLocationRaw;
+    type?: 'default' | 'primary' | 'warning' | 'error'
+    variant?: 'basic' | 'text'
+    disabled?: boolean
+    round?: boolean
+    circle?: boolean
+    href?: string
+    to?: RouteLocationRaw
+    size?: 'small' | 'medium' | 'large'
   }>(),
   {
     type: 'default',
@@ -34,11 +22,12 @@ const props = withDefaults(
     circle: false,
     href: undefined,
     to: undefined,
+    size: 'medium',
   },
 );
-const { variant, disabled, round, circle, href, type, to } = toRefs(props);
-
 const emits = defineEmits(['click']);
+
+const { variant, disabled, round, circle, href, type, to, size: sizeName } = toRefs(props);
 
 function handleClick(event: MouseEvent) {
   if (!disabled.value) {
@@ -58,18 +47,33 @@ const tag = computed(() => {
   return 'button';
 });
 const appTheme = useAppTheme();
+
+const size = computed(() => theme.value.size[sizeName.value]);
 </script>
+
+<template>
+  <component
+    :is="tag"
+    :href="href ?? to"
+    class="c-button"
+    :class="{ disabled, round, circle }"
+    :to="to"
+    @click="handleClick"
+  >
+    <slot />
+  </component>
+</template>
 
 <style lang="less" scoped>
 .c-button {
   line-height: 1;
   font-family: inherit;
-  font-size: inherit;
+  font-size: v-bind('size.fontSize');
   border: none;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  height: 34px;
+  height: v-bind('size.width');
   font-weight: 400;
   color: v-bind('variantTheme.textColor');
   padding: 0 14px;
@@ -89,8 +93,9 @@ const appTheme = useAppTheme();
   }
 
   &.circle {
-    border-radius: 40px;
-    width: 34px;
+    border-radius: v-bind('size.width');
+    width: v-bind('size.width');
+    padding: 0;
   }
 
   &:not(.disabled) {
