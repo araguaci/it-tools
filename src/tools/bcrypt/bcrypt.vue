@@ -23,17 +23,18 @@ const compareMatch = computed(() => compareSync(compareString.value, compareHash
       raw-text
       label="Your string: "
       label-position="left"
+      label-align="right"
       label-width="120px"
       mb-2
     />
     <n-form-item label="Salt count: " label-placement="left" label-width="120">
-      <n-input-number v-model:value="saltCount" placeholder="Salt rounds..." :max="10" :min="0" w-full />
+      <n-input-number v-model:value="saltCount" placeholder="Salt rounds..." :max="100" :min="0" w-full />
     </n-form-item>
 
     <c-input-text :value="hashed" readonly text-center />
 
     <div mt-5 flex justify-center>
-      <c-button @click="copy">
+      <c-button @click="copy()">
         Copy hash
       </c-button>
     </div>
@@ -45,7 +46,7 @@ const compareMatch = computed(() => compareSync(compareString.value, compareHash
         <c-input-text v-model:value="compareString" placeholder="Your string to compare..." raw-text />
       </n-form-item>
       <n-form-item label="Your hash: " label-placement="left">
-        <c-input-text v-model:value="compareHash" placeholder="Your hahs to compare..." raw-text />
+        <c-input-text v-model:value="compareHash" placeholder="Your hash to compare..." raw-text />
       </n-form-item>
       <n-form-item label="Do they match ? " label-placement="left" :show-feedback="false">
         <div class="compare-result" :class="{ positive: compareMatch }">

@@ -14,6 +14,9 @@ import {
 } from 'date-fns';
 import type { DateFormat, ToDateMapper } from './date-time-converter.types';
 import {
+  dateToExcelFormat,
+  excelFormatToDate,
+  isExcelFormat,
   isISO8601DateTimeString,
   isISO9075DateString,
   isMongoObjectId,
@@ -82,8 +85,14 @@ const formats: DateFormat[] = [
   {
     name: 'Mongo ObjectID',
     fromDate: date => `${Math.floor(date.getTime() / 1000).toString(16)}0000000000000000`,
-    toDate: objectId => new Date(parseInt(objectId.substring(0, 8), 16) * 1000),
+    toDate: objectId => new Date(Number.parseInt(objectId.substring(0, 8), 16) * 1000),
     formatMatcher: date => isMongoObjectId(date),
+  },
+  {
+    name: 'Excel date/time',
+    fromDate: date => dateToExcelFormat(date),
+    toDate: excelFormatToDate,
+    formatMatcher: isExcelFormat,
   },
 ];
 
@@ -142,24 +151,24 @@ function formatDateUsingFormatter(formatter: (date: Date) => string, date?: Date
 
 <template>
   <div>
-    <n-input-group>
+    <div flex gap-2>
       <c-input-text
         v-model:value="inputDate"
         autofocus
-        placeholder="Put you date string here..."
+        placeholder="Put your date string here..."
         clearable
         test-id="date-time-converter-input"
         :validation="validation"
         @update:value="onDateInputChanged"
       />
 
-      <n-select
+      <c-select
         v-model:value="formatIndex"
         style="flex: 0 0 170px"
         :options="formats.map(({ name }, i) => ({ label: name, value: i }))"
         data-test-id="date-time-converter-format-select"
       />
-    </n-input-group>
+    </div>
 
     <n-divider />
 

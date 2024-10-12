@@ -2,13 +2,14 @@ import { defineConfig, devices } from '@playwright/test';
 
 const isCI = !!process.env.CI;
 const baseUrl = process.env.BASE_URL || 'http://localhost:5050';
+const useWebServer = process.env.NO_WEB_SERVER !== 'true';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './src',
-  testMatch: /.*\.e2e\.(spec\.)?ts/,
+  testMatch: /\.e2e\.(spec\.)?ts$/,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -52,13 +53,13 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
 
-  ...(isCI
-    ? {}
-    : {
-        webServer: {
-          command: 'npm run preview',
-          url: 'http://127.0.0.1:5050',
-          reuseExistingServer: true,
-        },
-      }),
+  ...(useWebServer
+    && {
+      webServer: {
+        command: 'npm run preview',
+        url: 'http://localhost:5050',
+        reuseExistingServer: !isCI,
+      },
+    }
+  ),
 });

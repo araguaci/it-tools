@@ -23,7 +23,7 @@ const decodeInput = ref('Hello%20world%20%3A)');
 const decodeOutput = computed(() => withDefaultOnError(() => decodeURIComponent(decodeInput.value), ''));
 
 const decodeValidation = useValidation({
-  source: encodeInput,
+  source: decodeInput,
   rules: [
     {
       validator: value => isNotThrowing(() => decodeURIComponent(value)),
@@ -60,7 +60,7 @@ const { copy: copyDecoded } = useCopy({ source: decodeOutput, text: 'Decoded str
     />
 
     <div flex justify-center>
-      <c-button @click="copyEncoded">
+      <c-button @click="copyEncoded()">
         Copy
       </c-button>
     </div>
@@ -89,7 +89,7 @@ const { copy: copyDecoded } = useCopy({ source: decodeOutput, text: 'Decoded str
     />
 
     <div flex justify-center>
-      <c-button @click="copyDecoded">
+      <c-button @click="copyDecoded()">
         Copy
       </c-button>
     </div>
